@@ -29,10 +29,6 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 
-# Init
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,${LOCAL_PATH}/prebuilt/vendor,$(TARGET_COPY_OUT_VENDOR))
-
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -331,6 +327,20 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libjson
 
+# Ramdisk
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    init.device.rc \
+    init.proc_touchpanel.sh \
+    init.qcom.early_boot.sh \
+    init.qcom.post_boot.sh \
+    init.qcom.rc \
+    init.qcom.sh \
+    init.qcom.power.rc \
+    init.qcom.usb.rc \
+    init.recovery.qcom.rc \
+    ueventd.qcom.rc \
+
 # RCS
 PRODUCT_PACKAGES += \
     rcs_service_aidl \
@@ -342,16 +352,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     librecovery_updater_leeco
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/root/init.recovery.qcom.rc:root/init.recovery.qcom.rc
-
 # Releasetools
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/bin/toybox:install/bin/toybox \
-    $(LOCAL_PATH)/prebuilt/bin/deunify.sh:install/bin/deunify.sh \
-    $(LOCAL_PATH)/prebuilt/bin/sgdisk:install/bin/sgdisk \
-    $(LOCAL_PATH)/prebuilt/bin/unlock-vendor.sh:install/bin/unlock-vendor.sh \
-    $(LOCAL_PATH)/prebuilt/bin/partprobe.sh:install/bin/partprobe.sh \
+    $(LOCAL_PATH)/prebuilt/deunify.sh:install/bin/deunify.sh \
+    $(LOCAL_PATH)/prebuilt/partprobe.sh:install/bin/partprobe.sh \
+    $(LOCAL_PATH)/prebuilt/sgdisk:install/bin/sgdisk \
+    $(LOCAL_PATH)/prebuilt/toybox:install/bin/toybox \
+    $(LOCAL_PATH)/prebuilt/unlock-vendor.sh:install/bin/unlock-vendor.sh
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
