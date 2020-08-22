@@ -7,7 +7,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-# http://www.apache.org/licenses/LICENSE-2.0
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,8 +16,53 @@
 # limitations under the License.
 #
 
+set -e
+
+DEVICE=zl1
+VENDOR=leeco
+
+# Load extract_utils and do some sanity checks
+MY_DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
+
+LINEAGE_ROOT="$MY_DIR"/../../..
+
+HELPER="$LINEAGE_ROOT"/vendor/lineage/build/tools/extract_utils.sh
+if [ ! -f "$HELPER" ]; then
+    echo "Unable to find helper script at $HELPER"
+    exit 1
+fi
+. "$HELPER"
+
+# Default to sanitizing the vendor folder before extraction
+CLEAN_VENDOR=true
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -n | --no-cleanup )     CLEAN_VENDOR=false
+                                ;;
+        -s | --section )        shift
+                                SECTION=$1
+                                CLEAN_VENDOR=false
+                                ;;
+        * )                     SRC=$1
+                                ;;
+    esac
+    shift
+done
+
 function blob_fixup() {
 	case "${1}" in
+
+	# Correct android.hidl.manager@1.0-java jar name
+	vendor/etc/permissions/qti_libpermissions.xml)
+		sed -i -e 's|name=\"android.hidl.manager-V1.0-java|name=\"android.hidl.manager@1.0-java|g' "${2}"
+		;;
+
+	# use /sbin instead of /system/bin for TWRP
+	recovery/root/sbin/qseecomd)
+		sed -i -e 's|/system/bin/linker64|/sbin/linker64\x0\x0\x0\x0\x0\x0|g' "${2}"
+		;;
 
 	vendor/lib/libcppf.so)
 		# binhaxxed to load cppf firmware from /vendor/firmware/
@@ -32,19 +77,15 @@ function blob_fixup() {
 	esac
 }
 
-# If we're being sourced by the common script that we called,
-# stop right here. No need to go down the rabbit hole.
-if [ "${BASH_SOURCE[0]}" != "${0}" ]; then
-	return
+if [ -z "$SRC" ]; then
+    SRC=adb
 fi
 
-set -e
+# Initialize the helper
+setup_vendor "$DEVICE" "$VENDOR" "$LINEAGE_ROOT" false "$CLEAN_VENDOR"
 
-export DEVICE=zl1
-export DEVICE_COMMON=msm8996-common
-export VENDOR=leeco
+extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
 
-export DEVICE_BRINGUP_YEAR=2017
+"$MY_DIR"/setup-makefiles.sh
 
-# Use common extractor
-source "./../../${VENDOR}/${DEVICE_COMMON}/extract-files.sh" "$@"
+DEVICE_BLOB_ROOT="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary
