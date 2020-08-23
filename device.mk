@@ -454,4 +454,5 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.model
 
+$(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk)
 $(call inherit-product, vendor/leeco/zl1/zl1-vendor.mk)
