@@ -42,6 +42,11 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := kryo
 
+# Assertions
+TARGET_BOARD_INFO_FILE ?= $(PLATFORM_PATH)/board-info.txt
+TARGET_OTA_ASSERT_DEVICE := le_zl0,le_zl1,LEX720,LEX722,LEX727,zl0,zl1
+
+# Binder
 TARGET_USES_64_BIT_BINDER := true
 
 # Kernel
@@ -59,7 +64,6 @@ TARGET_KERNEL_SOURCE := kernel/leeco/msm8996
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
 TARGET_KERNEL_CONFIG := lineage_zl1_defconfig
-
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 
 # QCOM hardware
