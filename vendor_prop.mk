@@ -1,5 +1,5 @@
 #
-# Vendor properties for msm8996-common
+# Vendor properties for zl1
 #
 
 # Product
@@ -135,7 +135,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     vendor.display.disable_skip_validate=1 \
     vendor.display.enable_default_color_mode=1 \
     vendor.display.perf_hint_window=50 \
-    vendor.gralloc.disable_wb_ubwc=1 \
+    vendor.gralloc.disable_wb_ubwc=1
 
 # Graphics (OpenGLES)
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -148,7 +148,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
    persist.dbg.wfc_avail_ovr=1 \
    persist.radio.VT_ENABLE=1 \
    persist.radio.VT_HYBRID_ENABLE=1 \
-   persist.vendor.qti.telephony.vt_cam_interface=1
+   persist.vendor.qti.telephony.vt_cam_interface=1 \
+   vendor.service.qti.ims.enabled=1
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
