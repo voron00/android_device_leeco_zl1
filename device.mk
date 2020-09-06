@@ -345,7 +345,7 @@ PRODUCT_PACKAGES += \
     init.qcom.power.rc \
     init.qcom.usb.rc \
     init.recovery.qcom.rc \
-    ueventd.qcom.rc \
+    ueventd.qcom.rc
 
 # RCS
 PRODUCT_PACKAGES += \
@@ -425,10 +425,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
-
-# VNDK
-PRODUCT_PACKAGES += \
-    vndk-sp
 
 # VR
 PRODUCT_PACKAGES += \
