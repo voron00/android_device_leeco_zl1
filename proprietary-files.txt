@@ -983,7 +983,6 @@ etc/firmware/a530_zap.mdt:vendor/firmware/zl0/a530_zap.mdt|733744a140abe7f4e41c8
 # USB firmware
 etc/firmware/cyccg.cybin:vendor/firmware/cyccg.cybin
 etc/firmware/cyccg_table.cybin:vendor/firmware/cyccg_table.cybin
-etc/firmware/sii6400_wihd_mhl.fw:vendor/firmware/sii6400_wihd_mhl.fw
 
 # Wi-Fi - Gemini 8.0.0/OPR1.170623.032/8.5.24
 vendor/bin/cnss-daemon
