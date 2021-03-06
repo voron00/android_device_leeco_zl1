@@ -32,4 +32,7 @@ case "$DEVINFO" in
     ;;
 esac
 
+# Remove zl0 folder
+rm -r /vendor/firmware/zl0
+
 exit 0
