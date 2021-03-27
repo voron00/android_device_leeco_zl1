@@ -94,10 +94,11 @@ void init_target_properties()
             property_set("ro.power_profile.override", "power_profile_zl0");
             unknownDevice = 0;
         }
-        if (!strncmp(device.c_str(), "le_zl1_ww", 9)) {
+        else if (!strncmp(device.c_str(), "le_zl1_ww", 9)) {
             // This is LEX725
             property_override_dual("ro.product.device", "ro.product.vendor.device", "le_zl1");
             property_override_dual("ro.product.model", "ro.product.vendor.model", "LEX725");
+            property_override_dual("ro.product.name", "ro.product.vendor.name", "ZL1_WW");
             property_set("persist.data.iwlan.enable", "false");
             // Dual SIM
             property_set("persist.radio.multisim.config", "dsds");
