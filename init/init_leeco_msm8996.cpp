@@ -86,6 +86,7 @@ void init_target_properties()
             // This is LEX722
             property_override_dual("ro.product.device", "ro.product.vendor.device", "le_zl0");
             property_override_dual("ro.product.model", "ro.product.vendor.model", "LEX722");
+            property_override_dual("ro.product.name", "ro.product.vendor.name", "ZL0_CN");
             property_set("persist.data.iwlan.enable", "false");
             // Dual SIM
             property_set("persist.radio.multisim.config", "dsds");
