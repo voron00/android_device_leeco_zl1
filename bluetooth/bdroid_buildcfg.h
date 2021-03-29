@@ -22,25 +22,8 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#include <cutils/properties.h>
-#include <string.h>
-static inline const char *BtmGetDefaultName()
-{
-    char product_device[PROPERTY_VALUE_MAX];
-    property_get("ro.product.device", product_device, "");
+#define BTM_DEF_LOCAL_NAME "Le Pro 3"
 
-    if (strcmp(product_device, "le_zl0") == 0)
-        return "LePro 3";
-    if (strcmp(product_device, "le_zl1") == 0)
-        return "LePro 3";
-    if (strcmp(product_device, "le_x2") == 0)
-        return "Le Max 2";
-
-    // Fallback to ro.product.model
-    return "";
-}
-
-#define BTM_DEF_LOCAL_NAME BtmGetDefaultName()
 #define BLUETOOTH_QTI_SW TRUE
 // Disables read remote device feature
 #define MAX_ACL_CONNECTIONS   16
@@ -48,9 +31,7 @@ static inline const char *BtmGetDefaultName()
 #define BLE_VND_INCLUDED   TRUE
 // skips conn update at conn completion
 #define BT_CLEAN_TURN_ON_DISABLED 1
-
 /* Increasing SEPs to 12 from 6 to support SHO/MCast i.e. two streams per codec */
 #define AVDT_NUM_SEPS 12
 
-#undef PROPERTY_VALUE_MAX
 #endif
