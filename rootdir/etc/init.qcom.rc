@@ -800,10 +800,11 @@ service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
     oneshot
 
 service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
+    socket msm_irqbalance seqpacket 660 root system
     class core
     user root
     group root
-    disabled
+    writepid /dev/cpuset/system-background/tasks
 
 service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
     class main
